@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SoundRecorder</string>
+    <string name="tap_btn_to_start">Tap the button to start recording.</string>
+    <string name="recording">Recording...</string>
 </resources>
