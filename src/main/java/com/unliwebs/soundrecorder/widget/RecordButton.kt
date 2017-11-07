@@ -1,12 +1,9 @@
 package com.unliwebs.soundrecorder.widget
 
 import android.content.Context
-import android.media.Image
 import android.util.AttributeSet
 import android.support.v7.widget.AppCompatImageButton
 import com.unliwebs.soundrecorder.R
-
-//import android.widget.ImageButton
 
 /**
  * Created by jacobramilo on 4/11/17.
