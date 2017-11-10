@@ -1,26 +1,17 @@
 package com.jramilo.soundrecorder
 
-import android.Manifest
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.SystemClock
-import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.Toolbar
-import android.view.View
-import com.jramilo.soundrecorder.widget.RecordButtonListener
 import kotlinx.android.synthetic.main.activity_main.*
-import android.content.pm.PackageManager
-import android.support.design.widget.Snackbar
-import android.widget.AdapterView
-import com.jramilo.soundrecorder.adapter.RecordingsBaseAdapter
-import com.jramilo.soundrecorder.widget.PlaybackDialog
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentStatePagerAdapter
+import com.jramilo.soundrecorder.fragment.RecordingFragment
+import com.jramilo.soundrecorder.fragment.RecordingListFragment
 
-class MainActivity : AppCompatActivity(), RecordButtonListener, View.OnClickListener, AdapterView.OnItemClickListener {
-    private val permissions = arrayOf<String>(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    private val REQUEST_RECORD_AUDIO_PERMISSION = 200
-    private var permissionGranted:Boolean = false;
-    var recordingsBaseAdapter: RecordingsBaseAdapter? = null
+class MainActivity : AppCompatActivity() {
+    private var viewPagerAdapter: MainPagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,64 +19,39 @@ class MainActivity : AppCompatActivity(), RecordButtonListener, View.OnClickList
 
         setSupportActionBar(app_bar as Toolbar);
 
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
-
-        buttonRecord.setOnClickListener(this)
-        buttonRecord.recordingListener = this
-
-        reloadRecordingList()
+        viewPagerAdapter = MainPagerAdapter(supportFragmentManager)
+        viewPagerAdapter?.addFragment("Record", RecordingFragment())
+        viewPagerAdapter?.addFragment("Recordings", RecordingListFragment())
+        viewPager.adapter = viewPagerAdapter
+        tabLayout.setupWithViewPager(viewPager)
     }
 
-    fun reloadRecordingList() {
-        recordingsBaseAdapter = RecordingsBaseAdapter(this)
-        var recordings: ArrayList<String> = ArrayList()
-        recordingsListView.adapter = recordingsBaseAdapter
-        recordingsListView.setOnItemClickListener(this)
-        recordingsBaseAdapter?.reloadRecordings()
-    }
+    public class MainPagerAdapter: FragmentStatePagerAdapter {
+        private var mFragments: ArrayList<Fragment>
+        private var mFragmentsName: ArrayList<String>
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode) {
-            REQUEST_RECORD_AUDIO_PERMISSION -> {
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    permissionGranted = true
-                }
-            }
+        init {
+            mFragments = ArrayList()
+            mFragmentsName = ArrayList()
         }
-    }
 
-    override fun onStopRecording() {
-        chronometer.visibility = View.GONE
-        chronometer.stop()
-        tvRecordingState.text = getString(R.string.tap_btn_to_start)
-        stopService(Intent(this, RecordingService::class.java))
+        constructor(fm: FragmentManager?) : super(fm)
 
-        recordingsBaseAdapter?.reloadRecordings()
-    }
-
-    override fun onStartRecording() {
-        chronometer.visibility = View.VISIBLE
-        chronometer.base = SystemClock.elapsedRealtime()
-        chronometer.start()
-        tvRecordingState.text = getString(R.string.recording)
-        startService(Intent(this, RecordingService::class.java));
-    }
-
-    override fun onClick(view: View?) {
-        when(view) {
-            buttonRecord -> {
-                if(permissionGranted) {
-                    buttonRecord.toggle();
-                } else {
-                    Snackbar.make(mainConstraintLayout, getString(R.string.error_permission), Snackbar.LENGTH_SHORT).show()
-                }
-            }
+        fun addFragment(name: String, fragment: Fragment) {
+            mFragments.add(fragment)
+            mFragmentsName.add(name)
         }
-    }
 
-    override fun onItemClick(adapterView: AdapterView<*>?, view: View?, position: Int, p3: Long) {
-        var playbackDialog: PlaybackDialog = PlaybackDialog.newInstance(adapterView?.getItemAtPosition(position) as String)
-        playbackDialog.show(supportFragmentManager, "My Dialog")
+        override fun getItem(position: Int): Fragment? {
+            return mFragments.get(position)
+        }
+
+        override fun getCount(): Int {
+            return mFragments.size
+        }
+
+        override fun getPageTitle(position: Int): CharSequence {
+            return mFragmentsName.get(position)
+        }
     }
 }

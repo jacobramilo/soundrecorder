@@ -11,62 +11,23 @@
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
 
-
-    <com.jramilo.soundrecorder.widget.RecordButton
-        android:id="@+id/buttonRecord"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/tvRecordingState"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_start_recording" />
-
-    <Chronometer
-        android:id="@+id/chronometer"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textSize="60sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRecord"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/app_bar">
 
-    <TextView
-        android:id="@+id/tvRecordingState"
-        android:layout_width="wrap_content"
+    </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:gravity="center"
-        android:text="@string/tap_btn_to_start"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ListView
-        android:id="@+id/recordingsListView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/chronometer"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
 
+    </android.support.v4.view.ViewPager>
 
 </android.support.constraint.ConstraintLayout>
