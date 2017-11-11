@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ListView
 import com.jramilo.soundrecorder.R
-import com.jramilo.soundrecorder.adapter.RecordingsBaseAdapter
-import com.jramilo.soundrecorder.widget.PlaybackDialog
+import com.jramilo.soundrecorder.model.adapter.RecordingsBaseAdapter
+import com.jramilo.soundrecorder.PlaybackDialog
 
 /**
  * Created by jacobramilo on 10/11/17.

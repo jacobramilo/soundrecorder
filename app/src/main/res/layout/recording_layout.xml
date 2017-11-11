@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.jramilo.soundrecorder.widget.RecordButton
+    <ImageButton
         android:id="@+id/buttonRecord"
         android:layout_width="0dp"
         android:layout_height="48dp"

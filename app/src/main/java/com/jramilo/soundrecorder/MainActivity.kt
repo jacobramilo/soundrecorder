@@ -1,16 +1,21 @@
 package com.jramilo.soundrecorder
 
-import android.support.v7.app.AppCompatActivity
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import kotlinx.android.synthetic.main.activity_main.*
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import com.jramilo.soundrecorder.model.adapter.MainPagerAdapter
 import com.jramilo.soundrecorder.fragment.RecordingFragment
 import com.jramilo.soundrecorder.fragment.RecordingListFragment
+import com.jramilo.soundrecorder.model.util.AppPermission
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private val permissions = arrayOf<String>(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    private val REQUEST_RECORD_AUDIO_PERMISSION = 200
+
     private var viewPagerAdapter: MainPagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,34 +29,19 @@ class MainActivity : AppCompatActivity() {
         viewPagerAdapter?.addFragment("Recordings", RecordingListFragment())
         viewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
+
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
     }
 
-    public class MainPagerAdapter: FragmentStatePagerAdapter {
-        private var mFragments: ArrayList<Fragment>
-        private var mFragmentsName: ArrayList<String>
-
-        init {
-            mFragments = ArrayList()
-            mFragmentsName = ArrayList()
-        }
-
-        constructor(fm: FragmentManager?) : super(fm)
-
-        fun addFragment(name: String, fragment: Fragment) {
-            mFragments.add(fragment)
-            mFragmentsName.add(name)
-        }
-
-        override fun getItem(position: Int): Fragment? {
-            return mFragments.get(position)
-        }
-
-        override fun getCount(): Int {
-            return mFragments.size
-        }
-
-        override fun getPageTitle(position: Int): CharSequence {
-            return mFragmentsName.get(position)
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode) {
+            REQUEST_RECORD_AUDIO_PERMISSION -> {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    AppPermission.isGranted = true
+                }
+            }
         }
     }
 }

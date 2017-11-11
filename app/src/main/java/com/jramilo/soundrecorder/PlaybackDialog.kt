@@ -1,4 +1,4 @@
-package com.jramilo.soundrecorder.widget
+package com.jramilo.soundrecorder
 
 import android.app.Dialog
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.TextView
-import com.jramilo.soundrecorder.R
 
 /**
  * Created by jacobramilo on 7/11/17.

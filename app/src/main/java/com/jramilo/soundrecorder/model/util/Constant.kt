@@ -1,4 +1,4 @@
-package com.jramilo.soundrecorder
+package com.jramilo.soundrecorder.model.util
 
 import android.os.Environment
 

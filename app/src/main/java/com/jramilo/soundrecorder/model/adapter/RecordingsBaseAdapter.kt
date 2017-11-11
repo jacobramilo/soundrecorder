@@ -1,4 +1,4 @@
-package com.jramilo.soundrecorder.adapter
+package com.jramilo.soundrecorder.model.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,8 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.TextView
 import com.jramilo.soundrecorder.R
-import com.jramilo.soundrecorder.Constant
-import kotlinx.android.synthetic.main.recordings_listview_row.view.*
+import com.jramilo.soundrecorder.model.util.Constant
 import java.io.File
 
 /**
