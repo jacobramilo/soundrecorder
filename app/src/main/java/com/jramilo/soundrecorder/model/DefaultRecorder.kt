@@ -1,4 +1,4 @@
-package com.jramilo.soundrecorder.model.recorder
+package com.jramilo.soundrecorder.model
 
 import android.media.MediaRecorder
 import com.jramilo.soundrecorder.model.util.AppPermission
@@ -43,7 +43,7 @@ class DefaultRecorder: IRecorderPresenter {
             }
             isRecording = !isRecording
         } else {
-
+            recorderView.onError("Please grant the permissions in Android settings!")
         }
     }
 }

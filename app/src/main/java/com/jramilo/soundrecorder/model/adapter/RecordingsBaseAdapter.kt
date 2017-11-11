@@ -8,28 +8,20 @@ import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.TextView
 import com.jramilo.soundrecorder.R
-import com.jramilo.soundrecorder.model.util.Constant
 import java.io.File
 
 /**
  * Created by jacobramilo on 7/11/17.
  */
- public class RecordingsBaseAdapter(context: Context): BaseAdapter() {
-    private var recordings: ArrayList<String>;
-    private val mInflator: LayoutInflater
+ class RecordingsBaseAdapter(context: Context): BaseAdapter() {
+    private var recordings: ArrayList<String> = ArrayList()
+    private val mInflator: LayoutInflater = LayoutInflater.from(context)
 
-    init {
-        this.mInflator = LayoutInflater.from(context)
-        recordings = ArrayList()
-    }
-
-    public fun reloadRecordings() {
+    fun addToList(files: Array<File>?) {
         recordings.clear()
-        var file: File? = File(Constant.RECORDINGS_DIRECTORY)
-        file?.listFiles()?.forEach {
+        files?.forEach {
             recordings.add(it.name)
         }
-        notifyDataSetChanged()
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -44,7 +36,7 @@ import java.io.File
             vh = view.tag as ListRowHolder
         }
 
-        vh.tvRecording?.text = recordings?.get(position)
+        vh.tvRecording?.text = recordings[position]
 
         return view
     }
@@ -54,20 +46,15 @@ import java.io.File
     }
 
     override fun getItem(position: Int): String? {
-        return recordings.get(position)
+        return recordings[position]
     }
 
     override fun getCount(): Int {
-        return recordings.size;
+        return recordings.size
     }
 
     class ListRowHolder(row: View?) {
-        public val tvRecording: TextView?
-        public val buttonPlay: ImageButton?
-
-        init {
-            tvRecording = row?.findViewById(R.id.tvRecording)
-            buttonPlay = row?.findViewById(R.id.buttonPlay)
-        }
+        val tvRecording: TextView? = row?.findViewById(R.id.tvRecording)
+        val buttonPlay: ImageButton? = row?.findViewById(R.id.buttonPlay)
     }
 }

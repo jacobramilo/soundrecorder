@@ -1,4 +1,4 @@
-package com.jramilo.soundrecorder.model.recorder
+package com.jramilo.soundrecorder.model
 
 /**
  * Created by jacobramilo on 8/11/17.

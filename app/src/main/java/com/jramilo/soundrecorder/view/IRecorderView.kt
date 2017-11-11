@@ -6,4 +6,5 @@ package com.jramilo.soundrecorder.view
 interface IRecorderView {
     fun onStopped()
     fun onStarted()
+    fun onError(message: String)
 }
