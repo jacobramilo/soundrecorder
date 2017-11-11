@@ -1,18 +1,17 @@
 package com.jramilo.soundrecorder.model
 
 import android.util.Log
+import com.jramilo.soundrecorder.`interface`.RecordingsList
 import com.jramilo.soundrecorder.model.util.Constant
-import com.jramilo.soundrecorder.presenter.IListRecordsPresenter
-import com.jramilo.soundrecorder.view.IListRecorderView
 import java.io.File
 
 /**
  * Created by jacobramilo on 11/11/17.
  */
-class DefaultRecordsList: IListRecordsPresenter {
-    private var listRecorderView: IListRecorderView
+class DefaultRecordsList: RecordingsList.Presenter {
+    private var listRecorderView: RecordingsList.View
 
-    constructor(listRecorderView: IListRecorderView) {
+    constructor(listRecorderView: RecordingsList.View) {
         this.listRecorderView = listRecorderView
     }
 

@@ -8,19 +8,18 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import com.jramilo.soundrecorder.PlaybackDialog
 import com.jramilo.soundrecorder.R
+import com.jramilo.soundrecorder.`interface`.RecordingsList
 import com.jramilo.soundrecorder.model.DefaultRecordsList
 import com.jramilo.soundrecorder.model.adapter.RecordingsBaseAdapter
-import com.jramilo.soundrecorder.presenter.IListRecordsPresenter
-import com.jramilo.soundrecorder.view.IListRecorderView
 import kotlinx.android.synthetic.main.my_recordings_layout.*
 import java.io.File
 
 /**
  * Created by jacobramilo on 10/11/17.
  */
-class RecordingListFragment: Fragment(), AdapterView.OnItemClickListener, IListRecorderView  {
+class RecordingListFragment: Fragment(), AdapterView.OnItemClickListener, RecordingsList.View  {
     private var recordingsBaseAdapter: RecordingsBaseAdapter? = null
-    private var listRecordPresenter: IListRecordsPresenter = DefaultRecordsList(this)
+    private var listRecordPresenter: RecordingsList.Presenter = DefaultRecordsList(this)
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.my_recordings_layout, container, false)

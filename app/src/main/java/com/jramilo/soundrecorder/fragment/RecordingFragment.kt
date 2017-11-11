@@ -8,17 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jramilo.soundrecorder.R
+import com.jramilo.soundrecorder.`interface`.MainRecorder
 import com.jramilo.soundrecorder.model.DefaultRecorder
-import com.jramilo.soundrecorder.presenter.IRecorderPresenter
-import com.jramilo.soundrecorder.view.IRecorderView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.recording_layout.*
 
 /**
  * Created by jacobramilo on 10/11/17.
  */
-class RecordingFragment: Fragment(), View.OnClickListener, IRecorderView {
-    var recorderPresenter: IRecorderPresenter? = null;
+class RecordingFragment: Fragment(), View.OnClickListener, MainRecorder.View {
+    var recorderPresenter: MainRecorder.Presenter? = null;
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.recording_layout, container, false)

@@ -1,21 +1,20 @@
 package com.jramilo.soundrecorder.model
 
 import android.media.MediaRecorder
+import com.jramilo.soundrecorder.`interface`.MainRecorder
 import com.jramilo.soundrecorder.model.util.AppPermission
 import com.jramilo.soundrecorder.model.util.Constant
-import com.jramilo.soundrecorder.presenter.IRecorderPresenter
-import com.jramilo.soundrecorder.view.IRecorderView
 import java.io.File
 
 /**
  * Created by jacobramilo on 11/11/17.
  */
-class DefaultRecorder: IRecorderPresenter {
-    private var recorderView: IRecorderView
+class DefaultRecorder: MainRecorder.Presenter {
+    private var recorderView: MainRecorder.View
     private var isRecording: Boolean = false
     private var mediaRecorder: MediaRecorder? = null;
 
-    constructor(recorderView: IRecorderView) {
+    constructor(recorderView: MainRecorder.View) {
         this.recorderView = recorderView
     }
 
