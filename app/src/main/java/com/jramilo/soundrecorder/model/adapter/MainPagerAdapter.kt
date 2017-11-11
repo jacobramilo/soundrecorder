@@ -8,13 +8,8 @@ import android.support.v4.app.FragmentStatePagerAdapter
  * Created by jacobramilo on 11/11/17.
  */
 public class MainPagerAdapter: FragmentStatePagerAdapter {
-    private var mFragments: ArrayList<Fragment>
-    private var mFragmentsName: ArrayList<String>
-
-    init {
-        mFragments = ArrayList()
-        mFragmentsName = ArrayList()
-    }
+    private var mFragments: ArrayList<Fragment> = ArrayList()
+    private var mFragmentsName: ArrayList<String> = ArrayList()
 
     constructor(fm: FragmentManager?) : super(fm)
 
@@ -24,7 +19,7 @@ public class MainPagerAdapter: FragmentStatePagerAdapter {
     }
 
     override fun getItem(position: Int): Fragment? {
-        return mFragments.get(position)
+        return mFragments[position]
     }
 
     override fun getCount(): Int {
@@ -32,6 +27,6 @@ public class MainPagerAdapter: FragmentStatePagerAdapter {
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        return mFragmentsName.get(position)
+        return mFragmentsName[position]
     }
 }
